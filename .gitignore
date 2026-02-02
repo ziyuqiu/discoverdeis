@@ -1,6 +1,27 @@
+# OS files
 .DS_Store
+Thumbs.db
+
+# Media files (large)
 *.mov
 *.wav
 *.aup
 
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+
+# Node
+node_modules/
+
+# Meteor
+.meteor/local
+
+# Test coverage
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
