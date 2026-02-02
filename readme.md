@@ -5,6 +5,8 @@ Navigation and location finding web application for Brandeis University campus.
 [![Meteor](https://img.shields.io/badge/Meteor-1.4-blue.svg)](https://www.meteor.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+> **Warning**: This project uses Meteor 1.4.1.1 (2016) and contains deprecated packages. See [Security & Deprecation Notes](#security--deprecation-notes) before deploying.
+
 ## Overview
 
 Discover Deis is a mobile-friendly web application that helps students, visitors, and faculty navigate the Brandeis University campus. Features include:
@@ -25,6 +27,7 @@ Discover Deis is a mobile-friendly web application that helps students, visitors
 - [Testing](#testing)
 - [API Documentation](#api-documentation)
 - [Contributing](#contributing)
+- [Security & Deprecation Notes](#security--deprecation-notes)
 - [Team](#team)
 - [License](#license)
 
@@ -235,6 +238,44 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### Faculty Advisor
 - Prof. Tim Hickey
+
+## Security & Deprecation Notes
+
+> **This project was created in 2015-2016 and contains outdated dependencies.**
+
+### Critical Issues (Must Fix Before Production)
+
+| Issue | Severity | Description |
+|-------|----------|-------------|
+| `insecure` package | CRITICAL | Allows clients to directly modify database. Remove before production. |
+| `autopublish` package | HIGH | Publishes all data to all clients. Remove and implement proper publications. |
+| jQuery 1.11.9 | HIGH | Contains known CVEs (CVE-2019-11358, XSS vulnerabilities). Upgrade to 3.6+. |
+| Hardcoded API key | HIGH | TransLoc API key in `server/server.js`. Move to environment variables. |
+
+### Deprecated Packages
+
+| Package | Status | Replacement |
+|---------|--------|-------------|
+| `iron:router` | Unmaintained | Flow Router or React Router |
+| `fastclick` | Deprecated | Remove (no longer needed in modern browsers) |
+| `meteorhacks:async` | Unmaintained | Native async/await |
+| `u2622:persistent-session` | Unmaintained | `cultofcoders:persistent-session` |
+| `twbs:bootstrap` | Deprecated | Install via npm |
+| `matteodem:easy-search` | Unmaintained | Algolia, Meilisearch, or custom |
+| `ground:db` | Unmaintained | Modern offline solutions |
+| `mizzao:autocomplete` | Unmaintained | Modern autocomplete libraries |
+| `dburles:google-maps` | Unmaintained | Direct Google Maps API |
+
+### Recommended Actions
+
+1. **For Development/Demo**: App works as-is for local testing
+2. **For Production**:
+   - Remove `insecure` and `autopublish` packages
+   - Move API keys to environment variables
+   - Upgrade jQuery to 3.6+
+   - Consider migrating to modern Meteor (3.x) or alternative framework
+
+See [SECURITY.md](SECURITY.md) for detailed remediation steps.
 
 ## Related Projects
 
